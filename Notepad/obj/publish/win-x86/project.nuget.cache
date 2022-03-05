@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "AFkjHkYKz9vcr4Egr7B5AMgu1VjRWIeVtfMLlz0vJSkJm5L5KNQtSjT150qJpg9wJHDW7Fy+rNuNq7Ccu9r+Lw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\RamizKöfte\\source\\repos\\Notepad\\Notepad.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\RamizKöfte\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
+  "logs": []
+}
