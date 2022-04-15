@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Diagnostics;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Notepad
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
         public static OnLoad OnLoaded;
@@ -27,13 +18,12 @@ namespace Notepad
         public MainWindow()
         {
             InitializeComponent();
+            JustTools.Alternatives.ConsoleAllocator.ShowConsoleWindow();
 
-            //JustTools.Alternatives.ConsoleAllocator.ShowConsoleWindow();
 
-            #region
-
-            #endregion
+            
         }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -41,21 +31,52 @@ namespace Notepad
             {
                 OnLoaded.Invoke();
             }
-            //ThemeHandler.SetTheme("Dark");
+
             Transition.Visibility = Visibility.Visible;
-            //SetAccentState(BlurredLoginUIWindow.Class.AccentState.ACCENT_ENABLE_BLURBEHIND);
+
         }
+
 
         private void OpenHelpCenter(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://BetterPadHelpCenter.remzistudios.repl.co") { UseShellExecute = true });
         }
 
+        public void setBlurState(string state)
+        {
+            if (state == "active")
+            {
+                SetAccentState(BlurredLoginUIWindow.Class.AccentState.ACCENT_ENABLE_BLURBEHIND);
+            }
+            else
+            {
+                SetAccentState(BlurredLoginUIWindow.Class.AccentState.ACCENT_DISABLED);
+            }
+        }
 
         private void SwitchSettingsMenu(object sender, MouseButtonEventArgs _event)
         {
-            SettingsMenu.Visibility = SettingsMenu.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-            editorMenu.Visibility = SettingsMenu.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            SettingsMenu.Visibility = SettingsMenu.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            editorMenu.Visibility = SettingsMenu.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void SwitchPluginsMenu(object sender, MouseButtonEventArgs _event)
+        {
+            SettingsMenu.Visibility = SettingsMenu.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            PluginsMenu.Visibility = SettingsMenu.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+
+            PluginsDisplay.ShowLoadingObject();
+
+            if (PluginsMenu.Visibility == Visibility.Visible)
+            {
+                PluginsDisplay.ReloadDisplay(() =>
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        PluginsDisplay.HideLoadingObject();
+                    });
+                });
+            }
         }
 
         private void InputTextChanged(object sender, TextChangedEventArgs _event)

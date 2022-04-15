@@ -1,4 +1,7 @@
-﻿using System;
+﻿/// <summary>
+/// Just Tools By RemziStudios
+/// </summary>
+using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -15,8 +18,9 @@ namespace Notepad
 {
     public static class ThemeHandler
     {
-        private static List<string> Params = new List<string>();
+        private static string Params = "";
         private static MainWindow window = Application.Current.MainWindow as MainWindow;
+        public static string CurrentTheme = "Light";
 
         public static List<Theme> Themes = new List<Theme>()
         {
@@ -91,6 +95,70 @@ namespace Notepad
                     },
                     new ThemeDataItem()
                     {
+                        Object = new ParticularObject(window.OptionMaskTop),
+
+                        brush = new LinearGradientBrush()
+                        {
+                            StartPoint = new Point(0.5,0),
+                            EndPoint = new Point(0.5, 1),
+                            GradientStops = new GradientStopCollection()
+                            {
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(238, 244, 248)
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromArgb(0, 238, 244, 248),
+                                    Offset = 1
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(238, 244, 248),
+                                    Offset = 0.284
+                                }
+                            }
+                        },
+
+                        visibility = Visibility.Visible
+                    },
+                    new ThemeDataItem()
+                    {
+                        Object = new ParticularObject(window.OptionMaskBottom),
+
+                        brush = new LinearGradientBrush()
+                        {
+                            StartPoint = new Point(0.5,0),
+                            EndPoint = new Point(0.5, 1),
+                             GradientStops = new GradientStopCollection()
+                            {
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(238, 244, 248)
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromArgb(0, 238, 244, 248),
+                                    Offset = 1
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(238, 244, 248),
+                                    Offset = 0.284
+                                }
+                            }
+                        },
+
+                        visibility = Visibility.Visible
+                    },
+                    //new ThemeDataItem()
+                    //{
+                    //    Object = new ParticularObject(window.BlurOption),
+
+                    //    visibility = Visibility.Collapsed
+                    //},
+                    new ThemeDataItem()
+                    {
                         Object = new ParticularObject() { Object = window.InputText},
 
                         foreGround = new SolidColorBrush()
@@ -150,6 +218,26 @@ namespace Notepad
                              {
                                 Object = new TaggedThemeObject("[Theme:AdvancedSettingsImage]"),
                                 source = new BitmapImage(new Uri("./Assets/Light/Symbols/AdvancedSettingsSymbol.png", UriKind.Relative))
+                             },
+                             new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:RedirectImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Light/Symbols/AdvancedSettingsSymbol.png", UriKind.Relative))
+                             },
+                             new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:RedirectImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Light/Symbols/RedirectSymbol.png", UriKind.Relative))
+                             },
+                             new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:PluginImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Light/Symbols/PluginSymbol.png", UriKind.Relative))
+                             },
+                             new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:AppLanguageImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Light/Symbols/LanuageSymbol.png", UriKind.Relative))
                              }
                         }
                     }
@@ -178,7 +266,7 @@ namespace Notepad
                                 },
                                 new GradientStop()
                                 {
-                                    Color = Color.FromRgb(34,28,23),
+                                    Color = Color.FromRgb(28,23,34),
                                     Offset = 1
                                 }
                             }
@@ -202,7 +290,7 @@ namespace Notepad
                                 },
                                 new GradientStop()
                                 {
-                                    Color = Color.FromRgb(34,28,23),
+                                    Color = Color.FromRgb(28,23,34),
                                     Offset = 1
                                 }
                             }
@@ -249,6 +337,95 @@ namespace Notepad
                         },
                         foreGround = new SolidColorBrush(Colors.White)
                     },
+                    new ThemeDataItem()
+                    {
+                        Object = new ParticularObject(window.OptionMaskTop),
+
+                        Condition = new ConditionClass(()=> { return !Params.Contains("Transparent"); }),
+
+                        brush = new LinearGradientBrush()
+                        {
+                            StartPoint = new Point(0.5,0),
+                            EndPoint = new Point(0.5, 1),
+                            GradientStops = new GradientStopCollection()
+                            {
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(16, 18, 23)
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromArgb(0, 20, 23, 30),
+                                    Offset = 1
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(16, 18, 23),
+                                    Offset = 0.284
+                                }
+                            }
+                        },
+
+                        visibility = Visibility.Visible
+                    },
+
+                    new ThemeDataItem()
+                    {
+                        Object = new ParticularObject(window.OptionMaskTop),
+
+                        Condition = new ConditionClass(()=> { return Params.Contains("Transparent"); }),
+
+                        visibility = Visibility.Collapsed
+                    },
+                    new ThemeDataItem()
+                    {
+                        Object = new ParticularObject(window.OptionMaskBottom),
+
+                        Condition = new ConditionClass(()=> { return !Params.Contains("Transparent"); }),
+
+                        brush = new LinearGradientBrush()
+                        {
+                            StartPoint = new Point(0.5,0),
+                            EndPoint = new Point(0.5, 1),
+                            GradientStops = new GradientStopCollection()
+                            {
+                                new GradientStop()
+                                {
+                                    Color = Color.FromArgb(30, 20, 23, 30)
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromRgb(20, 23, 30),
+                                    Offset = 0.4
+                                },
+                                new GradientStop()
+                                {
+                                    Color = Color.FromArgb(0, 20 ,23, 30),
+                                    Offset = 1
+                                }
+
+                            }
+                        },
+
+                        visibility = Visibility.Visible
+
+                    },
+                    new ThemeDataItem()
+                    {
+                        Object = new ParticularObject(window.OptionMaskBottom),
+
+                        Condition = new ConditionClass(()=> { return Params.Contains("Transparent"); }),
+
+                        visibility= Visibility.Collapsed
+                    },
+                    //new ThemeDataItem()
+                    //{
+                    //    Condition = new ConditionClass(()=> { return Params.Contains("Transparent"); }),
+
+                    //    Object = new ParticularObject(window.BlurOption),
+
+                    //    visibility = Visibility.Visible
+                    //},
                     new ThemeDataItem()
                     {
                         Object = new TaggedThemeObject("[Theme:Text]"),
@@ -333,6 +510,21 @@ namespace Notepad
                              {
                                 Object = new TaggedThemeObject("[Theme:AdvancedSettingsImage]"),
                                 source = new BitmapImage(new Uri("./Assets/Dark/Symbols/AdvancedSettingsSymbol.png", UriKind.Relative))
+                             },
+                             new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:RedirectImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Dark/Symbols/RedirectSymbol.png", UriKind.Relative))
+                             },
+                             new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:PluginImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Dark/Symbols/PluginSymbol.png", UriKind.Relative))
+                             },
+                            new ThemeImageDataItem()
+                             {
+                                Object = new TaggedThemeObject("[Theme:AppLanguageImage]"),
+                                source = new BitmapImage(new Uri("./Assets/Dark/Symbols/LanuageSymbol.png", UriKind.Relative))
                              }
                         }
                     }
@@ -342,21 +534,12 @@ namespace Notepad
             }
         };
 
-        public static void SetTheme(string Name, string param = "")
+        public static void SetTheme(string Name, string param = "", FrameworkElement Over = null)
         {
             string ThemeName = Name;
+            CurrentTheme = Name;
 
-            if (!string.IsNullOrEmpty(param))
-            {
-                if (!Params.Contains(param))
-                {
-                    Params.Add(param);
-                }
-                else
-                {
-                    Params.Remove(param);
-                }
-            }
+            Params = param;
 
             for (int i = 0; i < Themes.Count; i++)
             {
@@ -371,7 +554,7 @@ namespace Notepad
 
                             if (item.Object is TaggedThemeObject)
                             {
-                                foreach (var itemObject in MainWindow.FindVisualChildren<FrameworkElement>(window.WindowGrid))
+                                foreach (var itemObject in MainWindow.FindVisualChildren<FrameworkElement>(Over ?? window.WindowGrid))
                                 {
                                     for (int k = 0; k < (item.Object as TaggedThemeObject).Tag.Length; k++)
                                     {
@@ -404,7 +587,7 @@ namespace Notepad
 
                             if (item.Object is TaggedThemeObject)
                             {
-                                foreach (var itemObject in MainWindow.FindVisualChildren<FrameworkElement>(window.WindowGrid))
+                                foreach (var itemObject in MainWindow.FindVisualChildren<FrameworkElement>(Over ?? window.WindowGrid))
                                 {
                                     for (int k = 0; k < (item.Object as TaggedThemeObject).Tag.Length; k++)
                                     {
@@ -415,7 +598,7 @@ namespace Notepad
                                     }
                                 }
 
-                                foreach (var itemObject in MainWindow.FindVisualChildren<Button>(window.WindowGrid))
+                                foreach (var itemObject in MainWindow.FindVisualChildren<Button>(Over ?? window.WindowGrid))
                                 {
                                     for (int k = 0; k < (item.Object as TaggedThemeObject).Tag.Length; k++)
                                     {
@@ -450,7 +633,7 @@ namespace Notepad
 
                                 if (item.Object is TaggedThemeObject)
                                 {
-                                    foreach (var itemObject in MainWindow.FindVisualChildren<Image>(window.WindowGrid))
+                                    foreach (var itemObject in MainWindow.FindVisualChildren<Image>(Over ?? window.WindowGrid))
                                     {
                                         for (int k = 0; k < (item.Object as TaggedThemeObject).Tag.Length; k++)
                                         {
@@ -461,7 +644,7 @@ namespace Notepad
                                         }
                                     }
 
-                                    foreach (var itemObject in MainWindow.FindVisualChildren<Button>(window.WindowGrid))
+                                    foreach (var itemObject in MainWindow.FindVisualChildren<Button>(Over ?? window.WindowGrid))
                                     {
                                         for (int k = 0; k < (item.Object as TaggedThemeObject).Tag.Length; k++)
                                         {
@@ -496,7 +679,7 @@ namespace Notepad
 
                             if (item.Object is TaggedThemeObject)
                             {
-                                foreach (var itemObject in MainWindow.FindVisualChildren<FrameworkElement>(window.WindowGrid))
+                                foreach (var itemObject in MainWindow.FindVisualChildren<FrameworkElement>(Over ?? window.WindowGrid))
                                 {
                                     for (int k = 0; k < (item.Object as TaggedThemeObject).Tag.Length; k++)
                                     {
@@ -533,15 +716,35 @@ namespace Notepad
                     }
                 }
             }
+
+            SetTargetResource(Over);
         }
 
-        private static void setThemeObject(IThemeDataItem dataItem, FrameworkElement targetObject)
+        public static void SetTargetResource(FrameworkElement Over)
+        {
+            foreach (var itemObject in MainWindow.FindVisualChildren<Image>(Over ?? window.WindowGrid))
+            {
+                var TargetResource = itemObject.GetTargetResource();
+
+                if (TargetResource == null) { continue; }
+
+                itemObject.Source = TargetResource.ConvertToImageSource(CurrentTheme);
+            }
+        }
+
+        public static void ReloadTheme(FrameworkElement Over = null)
+        {
+            SetTheme(CurrentTheme, "", Over);
+        }
+
+        public static void setThemeObject(IThemeDataItem dataItem, FrameworkElement targetObject)
         {
             if (dataItem is ThemeDataItem)
             {
                 var item = dataItem as ThemeDataItem;
 
                 targetObject.Opacity = item.opacity ?? targetObject.Opacity;
+                targetObject.Visibility = item.visibility ?? targetObject.Visibility;
 
                 if (targetObject is Rectangle)
                 {
@@ -581,6 +784,88 @@ namespace Notepad
 
         }
 
+
+        public static void SetThemeSmooth(string Theme, string param)
+        {
+            var duration = TimeSpan.FromSeconds(0.491);
+            var offset = 3;
+
+            var opacityAnimation = new DoubleAnimation()
+            {
+                To = 0,
+                Duration = duration
+            };
+
+            var transitionOpacityAnimation = new DoubleAnimation()
+            {
+                To = 1,
+                Duration = duration
+            };
+
+            var marginAnimation = new ThicknessAnimation()
+            {
+                Duration = duration
+            };
+
+            foreach (var item in MainWindow.FindVisualChildren<FrameworkElement>(window.WindowGrid))
+            {
+                if (item.Tag == null || (item.Tag is string && !item.Tag.ToString().Contains("TOA_Locked")))
+                {
+
+                    item.BeginAnimation(Rectangle.OpacityProperty, opacityAnimation);
+                    marginAnimation.To = new Thickness(item.Margin.Left, item.Margin.Top + offset, item.Margin.Right, item.Margin.Bottom);
+                    item.BeginAnimation(Rectangle.MarginProperty, marginAnimation);
+                    
+                    window.Dispatcher.Invoke(() => { item.Tag = (item.Tag ?? "").ToString() + "[waitingOpacity:" + item.Opacity + "]"; });
+
+                }
+            }
+
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(duration);
+                window.Dispatcher.Invoke(() =>
+                {
+                    transitionOpacityAnimation.To = 1;
+                    window.Transition.BeginAnimation(Rectangle.OpacityProperty, transitionOpacityAnimation);
+                });
+                System.Threading.Thread.Sleep(duration);
+                window.Dispatcher.Invoke(() =>
+                {
+                    ThemeHandler.SetTheme(Theme, param);
+                    transitionOpacityAnimation.To = 0;
+                    window.Transition.BeginAnimation(Rectangle.OpacityProperty, transitionOpacityAnimation);
+                });
+                System.Threading.Thread.Sleep(duration);
+                window.Dispatcher.Invoke(() =>
+                {
+                    opacityAnimation.To = 1;
+                    foreach (var item in MainWindow.FindVisualChildren<FrameworkElement>(window.WindowGrid))
+                    {
+                        if (item.Tag != null && item.Tag is string && item.Tag.ToString().Contains("[waitingOpacity:"))
+                        {
+                            try
+                            {
+                                double opacity = double.Parse(item.Tag.ToString().Split("[waitingOpacity:")[1].Split("]")[0]);
+                                opacityAnimation.To = opacity;
+                                item.Tag = item.Tag.ToString().Replace("[waitingOpacity:" + opacity + "]", "");
+                            }
+                            catch
+                            {
+                                opacityAnimation.To = 1;
+                            }
+
+                            item.BeginAnimation(Rectangle.OpacityProperty, opacityAnimation);
+                            marginAnimation.To = new Thickness(item.Margin.Left, item.Margin.Top - offset, item.Margin.Right, item.Margin.Bottom);
+                            item.BeginAnimation(Rectangle.MarginProperty, marginAnimation);
+
+                        }
+                    }
+                });
+
+            }).Start();
+        }
+
         public class Theme
         {
             public string Name;
@@ -602,6 +887,7 @@ namespace Notepad
         {
             public IThemeObject Object;
             public Brush brush;
+            public Visibility? visibility;
             public Brush foreGround;
             public double? opacity;
         }
@@ -671,87 +957,4 @@ namespace Notepad
         }
     }
 
-    public partial class MainWindow : Window
-    {
-
-        public void SetTheme(string Theme, string param)
-        {
-            var duration = TimeSpan.FromSeconds(0.491);
-            var offset = 3;
-
-            var opacityAnimation = new DoubleAnimation()
-            {
-                To = 0,
-                Duration = duration
-            };
-
-            var transitionOpacityAnimation = new DoubleAnimation()
-            {
-                To = 1,
-                Duration = duration
-            };
-
-            var marginAnimation = new ThicknessAnimation()
-            {
-                Duration = duration
-            };
-
-            foreach (var item in FindVisualChildren<FrameworkElement>(WindowGrid))
-            {
-                if (!(item.Tag != null && item.Tag.ToString().Contains("TOA_Locked")))
-                {
-                    item.BeginAnimation(Rectangle.OpacityProperty, opacityAnimation);
-                    marginAnimation.To = new Thickness(item.Margin.Left, item.Margin.Top + offset, item.Margin.Right, item.Margin.Bottom);
-                    item.BeginAnimation(Rectangle.MarginProperty, marginAnimation);
-                    this.Dispatcher.Invoke(() => { item.Tag = (item.Tag ?? "").ToString() + "[waitingOpacity:" + item.Opacity + "]"; });
-                }
-            }
-
-            new System.Threading.Thread(() =>
-            {
-                System.Threading.Thread.Sleep(duration);
-                this.Dispatcher.Invoke(() =>
-                {
-                    transitionOpacityAnimation.To = 1;
-                    Transition.BeginAnimation(Rectangle.OpacityProperty, transitionOpacityAnimation);
-                });
-                System.Threading.Thread.Sleep(duration);
-                this.Dispatcher.Invoke(() =>
-                {
-                    ThemeHandler.SetTheme(Theme, param);
-                    transitionOpacityAnimation.To = 0;
-                    Transition.BeginAnimation(Rectangle.OpacityProperty, transitionOpacityAnimation);
-                });
-                System.Threading.Thread.Sleep(duration);
-                this.Dispatcher.Invoke(() =>
-                {
-                    opacityAnimation.To = 1;
-                    foreach (var item in FindVisualChildren<FrameworkElement>(WindowGrid))
-                    {
-                        if (item.Tag != null && item.Tag.ToString().Contains("[waitingOpacity:"))
-                        {
-                            try
-                            {
-                                double opacity = double.Parse(item.Tag.ToString().Split("[waitingOpacity:")[1].Split("]")[0]);
-                                opacityAnimation.To = opacity;
-                                item.Tag = item.Tag.ToString().Replace("[waitingOpacity:" + opacity + "]", "");
-                            }
-                            catch
-                            {
-                                opacityAnimation.To = 1;
-                            }
-
-
-
-                            item.BeginAnimation(Rectangle.OpacityProperty, opacityAnimation);
-                            marginAnimation.To = new Thickness(item.Margin.Left, item.Margin.Top - offset, item.Margin.Right, item.Margin.Bottom);
-                            item.BeginAnimation(Rectangle.MarginProperty, marginAnimation);
-
-                        }
-                    }
-                });
-
-            }).Start();
-        }
-    }
 }

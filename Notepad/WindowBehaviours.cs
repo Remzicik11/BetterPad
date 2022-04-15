@@ -27,12 +27,63 @@ namespace Notepad
 
         private void MaximizeWindow(object sender, MouseButtonEventArgs _event)
         {
-            this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+            this.BeginAnimation(
+                 OpacityProperty,
+                 new System.Windows.Media.Animation.DoubleAnimation()
+                 {
+                     To = 0,
+                     EasingFunction = new System.Windows.Media.Animation.PowerEase() { EasingMode = System.Windows.Media.Animation.EasingMode.EaseInOut },
+                     Duration = TimeSpan.FromSeconds(0.18)
+                 }
+             );
+
+
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(300);
+
+                Dispatcher.Invoke(() =>
+                {
+                    BeginAnimation(OpacityProperty, new System.Windows.Media.Animation.DoubleAnimation() { To = 1, Duration = TimeSpan.FromSeconds(0.3) });
+                    WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+                });
+            }).Start();
         }
 
         private void MinimizeWindow(object sender, MouseButtonEventArgs _event)
         {
-            this.WindowState = WindowState.Minimized;
+            this.BeginAnimation(
+                 OpacityProperty,
+                 new System.Windows.Media.Animation.DoubleAnimation()
+                 {
+                     To = 0,
+                     EasingFunction = new System.Windows.Media.Animation.PowerEase() { EasingMode = System.Windows.Media.Animation.EasingMode.EaseInOut },
+                     Duration = TimeSpan.FromSeconds(0.2)
+                 }
+             );
+
+            new System.Threading.Thread(() =>
+            {
+                System.Threading.Thread.Sleep(300);
+
+                Dispatcher.Invoke(() =>
+                {
+                    BeginAnimation(OpacityProperty, new System.Windows.Media.Animation.DoubleAnimation() { To = 1, Duration = TimeSpan.FromSeconds(0) });
+                    WindowState = WindowState.Minimized;
+                });
+            }).Start();
+        }
+
+        private FrameworkElement GetObjectByTag(string Tag)
+        {
+            foreach (FrameworkElement obj in FindVisualChildren<UIElement>(this))
+            {
+                if (obj.Tag != null && obj.Tag.ToString().Contains(Tag))
+                {
+                    return obj;
+                }
+            }
+            return null;
         }
 
         private void MultiTrigger(object sender, MouseButtonEventArgs _event)
@@ -53,7 +104,7 @@ namespace Notepad
 
                         for (int j = 1; j < paramList.Length; j++)
                         {
-                            if(paramList[j] == "this")
+                            if (paramList[j] == "this")
                             {
                                 paramsObject[j - 1] = sender;
                             }

@@ -18,7 +18,6 @@ namespace Notepad
         
         private static byte CurrentMenu;
 
-
         private Menu[] Menus = new Menu[]
         {
             new Menu()
@@ -133,17 +132,15 @@ namespace Notepad
                         {
                             Margin = new Thickness(21, j == 0 ? 3 : 8, 21, 0)
                         };
-
-                        Item.Children.Add
-                        (
-                            new TextBlock()
-                            {
-                                TextWrapping = TextWrapping.WrapWithOverflow,
-                                Margin = new Thickness(0, 0, 81, 0),
-                                Text = Instance.Menus[i].Items[j].Label,
-                                HorizontalAlignment = HorizontalAlignment.Left
-                            }
-                        );
+                        
+                        Item.Children.Add(new TextBlock()
+                        {
+                            TextWrapping = TextWrapping.WrapWithOverflow,
+                            Margin = new Thickness(0, 0, 81, 0),
+                            Text = Instance.Menus[i].Items[j].Label,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            Tag = "[Theme:Text]"
+                        });
 
                         Item.Children.Add
                         (
@@ -152,7 +149,8 @@ namespace Notepad
                                 TextWrapping = TextWrapping.WrapWithOverflow,
                                 Margin = new Thickness(104, 0, 0, 0),
                                 HorizontalAlignment = HorizontalAlignment.Right,
-                                Text = Instance.Menus[i].Items[j].ShortCut
+                                Text = Instance.Menus[i].Items[j].ShortCut,
+                                Tag = "[Theme:Text]"
                             }
                         );
 
@@ -173,6 +171,8 @@ namespace Notepad
 
 
                         staticWindow.ToolBarMenuContent.Children.Add(Item);
+
+                        ThemeHandler.ReloadTheme(staticWindow.ToolBarMenuContent);
                     }
                     break;
                 }

@@ -1,14 +1,71 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Net;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Just Tools By RemziStudios
 /// </summary>
 namespace JustTools
 {
-    public class SystemBehaviours
+    public static class SystemBehaviours
     {
 
-        [System.Runtime.InteropServices.DllImport("Shell32.dll")]
+        [DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
+        public static bool IsInternetAvaible
+        {
+            get
+            {
+                try
+                {
+                    using (var client = new WebClient())
+                    using (client.OpenRead("http://google.com/generate_204"))
+                        return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static bool IsConnectedToInternet
+        {
+            get
+            {
+                int desc;
+                return InternetGetConnectedState(out desc, 0);
+            }
+
+        }
+
+        public static bool ApplicationIsActivated()
+        {
+            var activatedHandle = GetForegroundWindow();
+            if (activatedHandle == IntPtr.Zero)
+            {
+                return false;
+            }
+
+            var procId = Process.GetCurrentProcess().Id;
+            int activeProcId;
+            GetWindowThreadProcessId(activatedHandle, out activeProcId);
+
+            return activeProcId == procId;
+        }
+
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern int GetWindowThreadProcessId(IntPtr handle, out int processId);
+
+        [DllImport("Shell32.dll")]
         private static extern int SHChangeNotify(int eventId, int flags, IntPtr item1, IntPtr item2);
 
         public static void RefreshWindowsExplorer()

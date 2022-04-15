@@ -3,7 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notepad", "Notepad.csproj", "{FEB453FB-D0A9-4444-AE94-E8A48E31E82C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notepad", "Notepad.csproj", "{FEB453FB-D0A9-4444-AE94-E8A48E31E82C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4361EA53-9E90-46B7-A5D5-B331C13AFA3F} = {4361EA53-9E90-46B7-A5D5-B331C13AFA3F}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BetterPadPluginTemplate", "..\Better Pad Plugin Template\BetterPadPluginTemplate.csproj", "{4361EA53-9E90-46B7-A5D5-B331C13AFA3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NPCore", "..\NPCore\NPCore.csproj", "{DA59D22B-B32B-43D4-A527-570BAE85089C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NP Core", "NP Core", "{933F1683-CC51-4C0F-809D-99012FE499FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +24,20 @@ Global
 		{FEB453FB-D0A9-4444-AE94-E8A48E31E82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEB453FB-D0A9-4444-AE94-E8A48E31E82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEB453FB-D0A9-4444-AE94-E8A48E31E82C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4361EA53-9E90-46B7-A5D5-B331C13AFA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4361EA53-9E90-46B7-A5D5-B331C13AFA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4361EA53-9E90-46B7-A5D5-B331C13AFA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4361EA53-9E90-46B7-A5D5-B331C13AFA3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA59D22B-B32B-43D4-A527-570BAE85089C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA59D22B-B32B-43D4-A527-570BAE85089C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA59D22B-B32B-43D4-A527-570BAE85089C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA59D22B-B32B-43D4-A527-570BAE85089C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA59D22B-B32B-43D4-A527-570BAE85089C} = {933F1683-CC51-4C0F-809D-99012FE499FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D531C864-463F-4FFD-BE33-028B6AB134C3}

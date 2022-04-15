@@ -44,6 +44,8 @@ namespace Notepad
 
         public static void Save(bool asNew)
         {
+            if(!SystemBehaviours.ApplicationIsActivated()) { return; }
+            
             bool refresh = !File.Exists(SavePath);
 
             if (SavePath == null || asNew)

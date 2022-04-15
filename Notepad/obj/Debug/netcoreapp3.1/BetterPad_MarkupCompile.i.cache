@@ -1,7 +1,7 @@
 ﻿BetterPad
 1.0.0.0
 
-exe
+winexe
 C#
 .cs
 C:\Users\RamizKöfte\source\repos\Notepad\obj\Debug\netcoreapp3.1\
@@ -12,7 +12,7 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\RamizKöfte\source\repos\Notepad\App.xaml
 11407045341
 
-161150523296
+221557863512
 1931433823513
 MainWindow.xaml;
 
